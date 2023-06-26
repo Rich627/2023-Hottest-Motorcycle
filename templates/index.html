@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>2023最夯車款</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .motorcycle-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .motorcycle-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 220px;
+    }
+
+    .motorcycle-item span {
+      margin-bottom: 5px;
+    }
+
+    .motorcycle-item img {
+      width: 200px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    .radar-chart-container {
+      margin-top: 10px;
+      position: relative;
+      width: 200px;
+      height: auto;
+    }
+
+    .radar-chart {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>熱銷機車大解密</h1>
+  <p>本頁由Rich&Sean製作。</p>
+
+  <label for="type-select">選擇一個機車類型：</label>
+  <select id="type-select" onchange="filterByType(this.value)">
+    <option value="">全部</option>
+    <option value="速克達">速克達</option>
+    <option value="跑車">跑車</option>
+    <option value="街車">街車</option>
+    <option value="美式機車">美式機車</option>
+    <option value="越野車">越野車</option>
+    <option value="休旅車">休旅車</option>
+  </select>
+
+  <ul id="motorcycle-list" class="motorcycle-list">
+    {% for row in data %}
+    <li class="motorcycle-item">
+      <img src="{{ url_for('static', filename='images/' + row['name'] + '.png') }}">
+      <span>{{ row['type'] }}</span>
+      <span>{{ row['name'] }}</span>
+      <span>排名: {{ row['ranked'] }}</span>
+      <span>價格: {{ row['price'] }}萬</span>
+      <span>外觀: {{ row['appearance'] }}</span>
+      <span>CP值: {{ row['cp_value'] }}</span>
+      
+      <div class="radar-chart-container">
+        <img class="radar-chart" src="{{ url_for('static', filename='radarChart/' + row['name'] + '.png') }}">
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <script>
+    function filterByType(type) {
+      var motorcycleList = document.getElementById('motorcycle-list');
+      var motorcycleItems = motorcycleList.getElementsByClassName('motorcycle-item');
+
+      if (type === '') {
+        for (var i = 0; i < motorcycleItems.length; i++) {
+          motorcycleItems[i].style.display = 'flex';
+        }
+      } else {
+        for (var i = 0; i < motorcycleItems.length; i++) {
+          var motorcycleType = motorcycleItems[i].getElementsByTagName('span')[0].textContent;
+          if (motorcycleType !== type) {
+            motorcycleItems[i].style.display = 'none';
+          } else {
+            motorcycleItems[i].style.display = 'flex';
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>
