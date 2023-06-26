@@ -2,6 +2,8 @@
 
 This repository contains code to scrape motorcycle information from Yahoo Motorcycles, perform data processing using Pandas, utilize the OpenAI GPT-3.5 API for generating responses, store the data in a MSSQL database, and visualize the data using Matplotlib to create radar charts. Additionally, a Flask web application is built to display the collected information.
 
+<img src="https://github.com/Rich627/2023-Hottest-Motorcycle/blob/main/web.png" alt="Web" width="700" height="400">
+
 ## Code
 
 The code is written in Python and utilizes the following libraries:
